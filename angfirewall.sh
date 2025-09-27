@@ -27,11 +27,11 @@ iptables -A INPUT -p tcp -d 172.16.1.1 --dport 443 -j ACCEPT
 
 # === OPTIONAL: allow DNS if OPNsense is providing resolver ===
 # echo "Allowing DNS (UDP/TCP 53)..."
-iptables -A INPUT -p udp --dport 53 -j ACCEPT
-iptables -A INPUT -p tcp --dport 53 -j ACCEPT
+iptables -A INPUT -p udp -s 172.16.1.0/24 --dport 53 -j ACCEPT
+iptables -A INPUT -p tcp -s 172.16.1.0/24 --dport 53 -j ACCEPT
 
 # === OPTIONAL: allow DHCP if needed (67/68) ===
-# iptables -A INPUT -p udp --dport 67:68 -j ACCEPT
+ iptables -A INPUT -p udp -s 172.16.1.0/24 --dport 67:68 -j ACCEPT
 
 # === Logging last ===
 echo "Adding logging rule..."
